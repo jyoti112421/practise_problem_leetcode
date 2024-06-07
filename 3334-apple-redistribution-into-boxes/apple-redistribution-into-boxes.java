@@ -13,8 +13,7 @@ class Solution {
             }
             sum-=capacity[i];
             cnt++;
-
-        }
+     }
         return cnt;
         
     }
