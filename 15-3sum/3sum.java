@@ -1,33 +1,28 @@
 class Solution {
-    public List<List<Integer>> threeSum(int[] nums) {
-        List<List<Integer>> res = new ArrayList<>();
-        Arrays.sort(nums);
-
-        for (int i = 0; i < nums.length; i++) {
-            if (i > 0 && nums[i] == nums[i-1]) {
-                continue;
-            }
-            
-            int j = i + 1;
-            int k = nums.length - 1;
-
-            while (j < k) {
-                int total = nums[i] + nums[j] + nums[k];
-
-                if (total > 0) {
-                    k--;
-                } else if (total < 0) {
-                    j++;
-                } else {
-                    res.add(Arrays.asList(nums[i], nums[j], nums[k]));
-                    j++;
-
-                    while (nums[j] == nums[j-1] && j < k) {
-                        j++;
-                    }
-                }
+    public List<List<Integer>> threeSum(int[] arr) {
+        if(arr == null || arr.length<3)
+        return new ArrayList<>();
+        //sort the array
+        Arrays.sort(arr);
+        Set<List<Integer>>result = new HashSet<>();
+        //now fix the elemsnts and find the other two elemnts 
+        for(int i =0; i<arr.length-2;i++){
+            int left = i+1;
+            int right = arr.length-1;
+            while(left<right){
+                int sum = arr[i]+arr[left]+arr[right];
+                if(sum == 0){
+                    //add the set and move to find other triplets
+                    result.add(Arrays.asList(arr[i],arr[left],arr[right]));
+                    left++;
+                    right--;
+                }else if(sum<0)
+                left++;
+                else
+                right--;
             }
         }
-        return res;        
-    }
+        return new ArrayList<>(result);
+                }
 }
+           
